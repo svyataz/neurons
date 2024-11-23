@@ -6,20 +6,20 @@ class Neuron:
         self.LR = lr
         self.T = 0
 
-    def predict(self, x_image):
-        s = np.dot(x_image, self.W) - self.T
+    def predict(self, inputs):
+        s = np.dot(inputs, self.W) - self.T
         if s <= 0:
             return -1
         else:
             return 1
 
     def learning(self, inputs, outputs, loops = 1):
-        for i in range(loops - 1):
+        for k in range(loops - 1):
             for i in range(len(inputs)):
                 if self.predict(inputs[i]) != outputs[i]:
                     for j in range(len(self.W)):
                         self.W[j] += inputs[i][j] * outputs[i] * self.LR
-                    self.T -= outputs[i]
+                    self.T -= outputs[i] * self.LR
 
 X = ([-1, -1], [-1, 1], [1, -1], [1, 1])
 Y = [-1, -1, -1, 1]
