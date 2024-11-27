@@ -23,14 +23,14 @@ class Neuron:
                     self.T += self.LR * E
 
 X = ([-1, -1], [-1, 1], [1, -1], [1, 1])
-Y = [-1, -1, -1, 1]
+Y = [-1, 1, 1, 1]
 inst = Neuron(2)
 
 print(inst.W, inst.T)
 for i in range(4):
     print(inst.predict(X[i]))
 
-inst.learning(X, Y, 10000)
+inst.learning(X, Y, 1000)
 
 print(inst.W, inst.T)
 for i in range(4):
