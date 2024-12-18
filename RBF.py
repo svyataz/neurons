@@ -47,6 +47,7 @@ class Network:
         return np.exp(-1 / (2 * s ** 2) * (x - c) ** 2)
 
 X = np.random.uniform(0., 1., 30)
+print(X)
 y = (1 / (1 + np.exp(-X)))
 print(y)
 rbfnet = Network(k=2)

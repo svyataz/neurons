@@ -45,7 +45,7 @@ class Grossberg_layer:
 
 #сеть
 class Network:
-    def __init__(self, n, k, epochs=1000, lr = 0.7):
+    def __init__(self, n, k, epochs=100, lr = 0.7):
         self.som = som_layer(n, k)
         self.output_layer = Grossberg_layer(k, n)
         self.epochs = epochs
@@ -72,12 +72,12 @@ class Network:
                 #по нейронам кохонена веса меняю
                 for i in range(self.n):
                     for j in range(self.k):
-                        self.som.w[i][j] += self.lr * (x[i][j] - self.som.w[i][j])
+                        self.som.w[i][j] += self.lr * (x[k][j] - self.som.w[i][j])
                 #по нейронам гроcсберга веса меняю
                 for i in range(self.k):
                     if np.linalg.norm(y[i] - output) > 1e-5:
                         for j in range(self.n):
-                            self.output_layer.w[i][j] += self.output_layer.b * (y[i][j] - self.output_layer.w[i][j]) * output[j]
+                            self.output_layer.w[i][j] += self.output_layer.b * (y[k][i] - self.output_layer.w[i][j]) * output[i]
             #изменение Lr
             self.lr -= prev_lr / self.epochs / 2
             self.som.a += (1 - prev_a) / self.epochs
@@ -85,19 +85,19 @@ class Network:
 
 
 
-X = np.random.rand(10, 6)
-Y = np.random.rand(10, 6)
+X = np.random.rand(15, 6)
+Y = np.random.rand(15, 6)
 print('XXXXXXXXXXXXXXXXXXXXXXXX')
 print(X)
 print('YYYYYYYYYYYYYYYYYYYYYYYY')
 print(Y)
-inst = Network(3, 6)
+inst = Network(4, 6)
 print('111111111111111111111111')
-for i in range(10):
+for i in range(15):
     print(inst.out(X[i]))
 inst.train(X, Y)
 print('222222222222222222222222')
-for i in range(10):
+for i in range(15):
     print(inst.out(X[i]))
 print('YYYYYYYYYYYYYYYYYYYYYYYY')
 print(Y)

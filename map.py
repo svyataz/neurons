@@ -11,9 +11,10 @@ class maps:
 
     def winner(self, X):
         X = np.array(X)
+        print("WWWWWWWWW")
         print(self.w)
         self.distances = np.sqrt(np.sum((X - self.w[:, np.newaxis]) ** 2, axis=2))
-        print("---------")
+        print("DDDDDDDDD")
         print(self.distances)
         closest = np.min(self.distances)
         return np.where(self.distances == closest)[0]
@@ -35,12 +36,13 @@ class maps:
                 for i in range(len(self.w)):
                     self.w[i] += self.lr * self.g(i,j) * self.distances[i]
 
-X = np.random.rand(5, 3)
+X = np.random.rand(5, 2)
 print(X)
-inst = maps(5, 3)
+inst = maps(5, 2)
 
 print(*inst.winner(X[0]))
 inst.train(X)
+print("XXXXXXXXX")
 print(X[0])
-print("---------")
+print("!!!!!!!!!")
 print(*inst.winner(X[0]))
